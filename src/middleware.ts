@@ -4,17 +4,26 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get('authToken');
   const { pathname } = request.nextUrl;
 
-  if (pathname === '/' && !token) {
+  const isAuthPage = pathname === '/login';
+  const isRoot = pathname === '/';
+  const isDashboard = pathname.startsWith('/dashboard');
+  const isProductsPage = pathname.startsWith('/products');
+
+  if ((isRoot || isDashboard || isProductsPage) && !token) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
-  if (pathname === '/login' && token) {
-    return NextResponse.redirect(new URL('/', request.url));
+  if (isAuthPage && token) {
+    return NextResponse.redirect(new URL('/dashboard', request.url));
+  }
+
+  if (isRoot && token) {
+    return NextResponse.redirect(new URL('/dashboard', request.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/', '/login'],
+  matcher: ['/', '/login', '/products', '/dashboard/:path*'],
 };

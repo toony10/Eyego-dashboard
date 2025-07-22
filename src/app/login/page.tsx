@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { AuthError, signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/app/firebase/config';
 import { RiDashboardHorizontalFill } from "react-icons/ri";
 import { MdErrorOutline } from "react-icons/md";

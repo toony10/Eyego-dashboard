@@ -5,9 +5,6 @@ import { SectionCards } from '@/components/dashboard/section-cards'
 
 export default async function page() {
 
-    const response = await fetch('https://dummyjson.com/products')
-    const data = await response.json()
-
     return (
         <div className="flex flex-1 flex-col">
             <div className="@container/main flex flex-1 flex-col gap-2">

@@ -2,26 +2,11 @@
 
 import * as React from "react"
 import {
-  IconCamera,
   IconChartBar,
-  IconDashboard,
-  IconDatabase,
-  IconFileAi,
-  IconFileDescription,
-  IconFileWord,
-  IconFolder,
-  IconHelp,
-  IconInnerShadowTop,
   IconListDetails,
-  IconReport,
-  IconSearch,
-  IconSettings,
-  IconUsers,
 } from "@tabler/icons-react"
 
-import { NavDocuments } from "@/components/dashboard/nav-documents"
 import { NavMain } from "@/components/dashboard/nav-main"
-import { NavSecondary } from "@/components/dashboard/nav-secondary"
 import { NavUser } from "@/components/dashboard/nav-user"
 import { RiDashboardHorizontalFill } from "react-icons/ri";
 
@@ -44,12 +29,12 @@ const data = {
   navMain: [
     {
       title: "Statistics",
-      url: "./statistics",
+      url: "/dashboard/statistics",
       icon: IconChartBar,
     },
     {
       title: "Products",
-      url: "./products",
+      url: "/dashboard/products",
       icon: IconListDetails,
     }
   ],

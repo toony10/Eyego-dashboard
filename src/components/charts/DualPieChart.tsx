@@ -10,12 +10,12 @@ export default function DualPieChart() {
         <ResponsiveContainer width="100%" height={ 320 }>
             <PieChart>
                 <Pie data={ pieChartData1 } dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={ 70 } fill="#8884d8">
-                    { pieChartData1.map((_, i) => (
+                    { pieChartData1.map((item, i) => (
                         <Cell key={ i } fill={ COLORS[i % COLORS.length] } />
                     )) }
                 </Pie>
                 <Pie data={ pieChartData2 } dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={ 80 } outerRadius={ 110 } fill="#82ca9d" label>
-                    { pieChartData2.map((_, i) => (
+                    { pieChartData2.map((item, i) => (
                         <Cell key={ i } fill={ COLORS[(i + 3) % COLORS.length] } />
                     )) }
                 </Pie>

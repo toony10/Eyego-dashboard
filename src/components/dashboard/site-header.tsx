@@ -1,25 +1,30 @@
 'use client';
-import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { useRouter } from 'next/navigation';
 import { signOut } from "firebase/auth";
 import { auth } from '@/app/firebase/config';
+import { useAppDispatch } from '@/hooks/redux'
+import { logout } from '@/store/slices/authSlice'
 
 export function SiteHeader() {
   const router = useRouter();
+  const dispatch = useAppDispatch()
+
 
   const handleLogout = async () => {
     try {
-      await signOut(auth);
-      document.cookie = 'authToken=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
-      console.log('Logged out');
-      router.push('/login');
-    } catch (error) {
-      console.error('Logout Error:', error);
-    }
-  };
+      await signOut(auth)
 
+      document.cookie = 'authToken=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT'
+
+      dispatch(logout())
+
+      router.push('/login')
+    } catch (error) {
+      console.error('Logout Error:', error)
+    }
+  }
 
   return (
     <header className="flex h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">

@@ -4,11 +4,13 @@ import * as React from "react"
 import {
   IconChartBar,
   IconListDetails,
+  IconUser,
 } from "@tabler/icons-react"
 
 import { NavMain } from "@/components/dashboard/nav-main"
 import { NavUser } from "@/components/dashboard/nav-user"
-import { RiDashboardHorizontalFill } from "react-icons/ri";
+import { RiDashboardHorizontalFill } from "react-icons/ri"
+import { useAppSelector } from "@/hooks/redux"
 
 import {
   Sidebar,
@@ -19,29 +21,35 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { Skeleton } from "@/components/ui/skeleton"
 
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+const navItems = [
+  {
+    title: "Statistics",
+    url: "/dashboard/statistics",
+    icon: IconChartBar,
   },
-  navMain: [
-    {
-      title: "Statistics",
-      url: "/dashboard/statistics",
-      icon: IconChartBar,
-    },
-    {
-      title: "Products",
-      url: "/dashboard/products",
-      icon: IconListDetails,
-    }
-  ],
-
-}
+  {
+    title: "Products",
+    url: "/dashboard/products",
+    icon: IconListDetails,
+  }
+]
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { user, isAuthenticated, isLoading } = useAppSelector((state) => state.auth)
+
+  const getUserData = () => {
+
+    return {
+      name: user?.displayName || user?.email?.split('@')[0] || 'User',
+      email: user?.email || 'No email',
+      avatar: user?.photoURL || '/avatars/default.jpg',
+    }
+  }
+
+  const userData = getUserData()
+
   return (
     <Sidebar collapsible="offcanvas" { ...props }>
       <SidebarHeader>
@@ -60,10 +68,20 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={ data.navMain } />
+        <NavMain items={ navItems } />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={ data.user } />
+        { isLoading ? (
+          <div className="flex items-center space-x-3 p-2">
+            <Skeleton className="h-8 w-8 rounded-full" />
+            <div className="space-y-2">
+              <Skeleton className="h-4 w-20" />
+              <Skeleton className="h-3 w-32" />
+            </div>
+          </div>
+        ) : (
+          <NavUser user={ userData } />
+        ) }
       </SidebarFooter>
     </Sidebar>
   )

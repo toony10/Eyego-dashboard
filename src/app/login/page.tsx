@@ -5,41 +5,43 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/app/firebase/config';
 import { RiDashboardHorizontalFill } from "react-icons/ri";
 import { MdErrorOutline } from "react-icons/md";
+import { useAppDispatch, useAppSelector } from '@/hooks/redux'
+import { loginStart, loginSuccess, loginFailure } from '@/store/slices/authSlice'
 
 export default function LoginPage() {
-    const router = useRouter();
+    const dispatch = useAppDispatch()
+    const { isLoading, error } = useAppSelector((state) => state.auth)
+    const router = useRouter()
 
-    const [formData, setFormData] = useState({ email: '', password: '' });
-    const [error, setError] = useState<string | null>(null);
-    const [loading, setLoading] = useState(false);
+    const [formData, setFormData] = useState({ email: '', password: '' })
 
     const handleLogin = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setError(null);
-        setLoading(true);
+        e.preventDefault()
+        dispatch(loginStart())
 
         try {
             const userCredential = await signInWithEmailAndPassword(
                 auth,
                 formData.email,
                 formData.password
-            );
+            )
 
-            const user = userCredential.user;
+            const user = userCredential.user
+            const token = await user.getIdToken()
 
-            const token = await user.getIdToken();
+            document.cookie = `authToken=${ token }; path=/; max-age=3600; Secure; SameSite=Lax`
 
-            document.cookie = `authToken=${ token }; path=/; max-age=3600; Secure; SameSite=Lax`;
+            dispatch(loginSuccess({ user, token }))
 
-            setFormData({ email: '', password: '' });
-            router.push('/');
-        } catch (error) {
-            console.error(error);
-            setError('Login failed. Please try again.');
-        } finally {
-            setLoading(false);
+            console.log('User stored in Redux:', user)
+
+            setFormData({ email: '', password: '' })
+            router.push('/')
+        } catch (error: any) {
+            console.error(error)
+            dispatch(loginFailure('Login failed. Please try again.'))
         }
-    };
+    }
 
 
     return (
@@ -91,10 +93,10 @@ export default function LoginPage() {
 
                         <button
                             type="submit"
-                            disabled={ loading }
+                            disabled={ isLoading }
                             className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white py-3 Rounded-xl rounded-xl font-medium transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                            { loading ? 'Signing in…' : 'Sign In' }
+                            { isLoading ? 'Signing in…' : 'Sign In' }
                         </button>
                     </form>
                 </div>

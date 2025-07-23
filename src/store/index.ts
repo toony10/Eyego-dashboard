@@ -1,12 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit';
-// import authSlice from './slices/authSlice';
-// import dashboardSlice from './slices/dashboardSlice';
+import authReducer from './slices/authSlice';
 
 export const store = configureStore({
   reducer: {
-    // auth: authSlice,
-    // dashboard: dashboardSlice,
+    auth: authReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ['auth/loginSuccess'],
+        ignoredActionsPaths: ['payload.user'],
+        ignoredPaths: ['auth.user'],
+      },
+    }),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

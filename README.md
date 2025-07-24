@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧿 Eyego Dashboard Platform
 
-## Getting Started
+**Eyego Dashboard** is a modern web-based platform designed for managing products through a clean, responsive, and interactive admin panel. Built with cutting-edge technologies to ensure scalability, performance, and an exceptional user experience.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Features
+
+- 🔐 User authentication via Firebase
+- 🎨 Elegant and modular UI built with [ShadCN UI](https://ui.shadcn.com/)
+- 📊 Interactive charts using Recharts
+- ⚛️ State management with Redux Toolkit
+- 🧩 Modular architecture with TypeScript and Next.js 15
+- 💅 Tailwind CSS for fast and responsive styling
+
+---
+
+## 🔑 Test Credentials
+
+You can log in using the following test account:
+
+```
+Email: justfortest@ex.com  
+Password: 12345@aA
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Technology       | Purpose                              |
+|------------------|---------------------------------------|
+| Next.js 15       | React framework (App Router, SSR)     |
+| TypeScript       | Static typing                         |
+| Tailwind CSS     | Utility-first CSS framework           |
+| ShadCN UI        | Accessible components on Tailwind     |
+| Firebase Auth    | User authentication                   |
+| Redux Toolkit    | State management                      |
+| Recharts         | Data visualization                    |
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## ⚙️ Getting Started
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Follow these steps to run the project locally:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Clone the repository**
 
-## Deploy on Vercel
+   ```bash
+   git clone https://github.com/toony10/Eyego-dashboard
+   cd eyego-dashboard
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Install dependencies**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   ```bash
+   npm install
+   ```
+
+3. **Run the development server**
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Open in browser**
+
+   Navigate to: `http://localhost:3000`
+
+---
+
+## 📁 Project Structure
+
+```bash
+eyego-dashboard/
+├── public/                  # Static assets (images, icons, etc.)
+├── src/
+│   ├── app/                 # Next.js app router structure
+│   │   ├── dashboard/
+│   │   │   ├── products/
+│   │   │   └── statistics/
+│   │   ├── firebase/        # Firebase auth configs
+│   │   ├── login/           # Login page
+│   │   ├── layout.tsx       # Root layout
+│   │   ├── page.tsx         # Entry page
+│   ├── components/
+│   │   ├── charts/          # Recharts components
+│   │   ├── dashboard/       # Dashboard-specific components
+│   │   └── ui/              # UI elements (buttons, inputs...)
+│   ├── data/                # Static data and constants
+│   ├── hooks/               # Custom React hooks
+│   ├── lib/                 # Utility functions, services, helpers
+│   ├── providers/           # Context and app providers
+│   ├── store/               # Redux Toolkit slices & configuration
+│   ├── types/               # TypeScript type definitions
+│   ├── utils/               # Utility functions/helpers
+│   ├── globals.css          # Global styles
+│   └── middleware.ts        # Middleware logic
+├── .env.local               # Environment variables
+├── .gitignore
+└── README.md
+```
+
+---
+
+## 👤 Author
+
+- **Name**: Anton amir 
+- **GitHub**: [github.com/toony10](https://github.com/toony10)  
+- **Email**: amiranton257@gmail.com

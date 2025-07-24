@@ -1,4 +1,4 @@
-# 🧿 Eyego Dashboard Platform
+# Eyego Dashboard Platform
 
 **Eyego Dashboard** is a modern web-based platform designed for managing products through a clean, responsive, and interactive admin panel. Built with cutting-edge technologies to ensure scalability, performance, and an exceptional user experience.
 
